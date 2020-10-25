@@ -4,8 +4,8 @@ import math
 import random
 
 def export_data_txt(data):
-	#TODO: implementar essa função
-	pass
+	data.insert(0,'id',range(0,len(data)))
+	data.to_csv("./resultados_k_means.txt",sep='\t',index=False)
 
 def manhatam_distance(u,v):
 	return np.sum(np.abs(u-v))
@@ -36,6 +36,15 @@ def calculate_new_mean(data):
 	return [x/len(data_array) for x in new_mean]
 
 
+def are_equal(data1,data2):
+	if (data2 is None):
+		return False
+	
+	for d1,d2 in zip(data1.iloc[:,-1].values,data2.iloc[:,-1].values):
+		if(d1!=d2):
+			return False
+	return True
+
 def k_nearest_neighbors(data, k,seed, distance_to_use, iterations=50):
 	data = data.assign(group = -1)
 	means = data.sample(k, random_state = seed).values[:,:-1]
@@ -43,23 +52,20 @@ def k_nearest_neighbors(data, k,seed, distance_to_use, iterations=50):
 	
 	j = 0
 	while True:
+		
 		for i in range(len(data)):
 			data.loc[i,'group'] = calculate_group(data.iloc[i].values[:-1],means,distance_to_use)
 
 		
-		if data.equals(old_data) or j == iterations:
+		if are_equal(data,old_data) or j == iterations:
 			export_data_txt(data)
-			print(data)
-			print(old_data)
 			return
 		
-		old_data = data[:]
-
+		old_data = data.copy()
+		
 		for i in range(k):
 			data_by_group = old_data['group'] == i
 			means[i] = calculate_new_mean(old_data[data_by_group])
-			
-		
 			
 		j += 1
 	
@@ -82,4 +88,5 @@ def execute(path, k = 7, d = 2, seed = 42):
 
 
 execute("iris_teste.txt",3,1,seed=42)
+
 

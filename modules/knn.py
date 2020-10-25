@@ -63,7 +63,7 @@ def execute(path, k = 7, d = 2):
 		distance = supreme_distance
 	elif(d==1):
 		distance = manhatam_distance
-	elif(d == 2):
+	else:
 		distance = euclidian_distance
 
 	k_nearest_neighbors(train.loc[:], test.loc[:], k, distance)
