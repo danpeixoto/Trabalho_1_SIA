@@ -7,4 +7,4 @@ from kmeans import execute as execute_k_means
 
 
 
-execute_k_means("iris_teste.txt",5,0)
+execute_knn("iris_teste.txt",5,0)

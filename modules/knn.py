@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import math
+
 
 def manhatam_distance(u,v):
 	return np.sum(np.abs(u-v))
@@ -10,6 +10,8 @@ def euclidian_distance(u,v):
 
 def supreme_distance(u,v):
 	return np.amax(np.abs(u-v))
+
+
 
 def calculate_class(data, classes):
 	classes_dict = {classes[i]: i for i in range(len(classes))}
@@ -26,7 +28,7 @@ def calculate_class(data, classes):
 	print(','.join(str(x) for x in list(data.index)), '\n')
 
 
-def k_nearest_neighbors(data, predict, k=7, distance_to_use=euclidian_distance):
+def k_nearest_neighbors(data, predict, k, distance_to_use):
 
 	data_array = data.iloc[:].values
 	predict_array = predict.iloc[:].values
@@ -51,7 +53,7 @@ def k_nearest_neighbors(data, predict, k=7, distance_to_use=euclidian_distance):
 		calculate_class(sorted_data.iloc[:k], classes)
 
 
-def execute(path, k, d):
+def execute(path, k = 7, d = 2):
 
 	data = pd.read_csv(path, delimiter=r'\s+')
 	data = data.drop('id', 1)
