@@ -8,7 +8,7 @@ import random
 def export_data_txt(data):
 	ids = pd.Series(id_save)
 	data.insert(loc=0, column='id', value=ids)
-	data.to_csv('./resultados_k_means.txt',sep='\t',index=False)
+	data.to_csv('./resultados/kmeans/resultados_k_means.txt',sep='\t',index=False)
 
 def manhatam_distance(u,v):
 	return np.sum(np.abs(u-v))

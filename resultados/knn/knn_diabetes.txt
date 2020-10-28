@@ -1,0 +1,59 @@
+Classe prevista:tested_positive
+vizinhos mais proximos: 306,614,188 
+
+Classe prevista:tested_positive
+vizinhos mais proximos: 306,301,188
+
+Classe prevista:tested_positive
+vizinhos mais proximos: 359,614,306
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 681,251,686
+
+Classe prevista:tested_positive
+vizinhos mais proximos: 614,301,188
+
+Classe prevista:tested_positive
+vizinhos mais proximos: 359,43,614
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 602,339,251
+
+Classe prevista:tested_positive
+vizinhos mais proximos: 43,614,306 
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 161,188,575
+
+Classe prevista:tested_positive
+vizinhos mais proximos: 161,70,301
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 602,196,572
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 196,556,686
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 575,602,70
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 686,196,602
+
+Classe prevista:tested_positive
+vizinhos mais proximos: 188,70,614
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 556,251,686
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 572,70,161
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 686,117,251
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 251,196,602
+
+Classe prevista:tested_negative
+vizinhos mais proximos: 251,196,602
