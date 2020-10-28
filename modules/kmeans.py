@@ -3,9 +3,12 @@ import numpy as np
 import math
 import random
 
+
+
 def export_data_txt(data):
-	data.insert(0,'id',range(0,len(data)))
-	data.to_csv("./resultados_k_means.txt",sep='\t',index=False)
+	ids = pd.Series(id_save)
+	data.insert(loc=0, column='id', value=ids)
+	data.to_csv('./resultados_k_means.txt',sep='\t',index=False)
 
 def manhatam_distance(u,v):
 	return np.sum(np.abs(u-v))
@@ -27,25 +30,18 @@ def calculate_group(data,means,distance_to_use):
 
 def calculate_new_mean(data):
 	data_array = data.iloc[:,:-1].values
-	new_mean = [0 for i in range(len(data_array[0]))]
+	new_mean = [0.0 for i in range(len(data_array[0]))]
 
 	for dt in data_array:
 		for i in range(len(dt)):
 			new_mean[i] += dt[i]
 	
-	return [x/len(data_array) for x in new_mean]
+	return [x/float(len(data_array)) for x in new_mean]
 
 
-def are_equal(data1,data2):
-	if (data2 is None):
-		return False
-	
-	for d1,d2 in zip(data1.iloc[:,-1].values,data2.iloc[:,-1].values):
-		if(d1!=d2):
-			return False
-	return True
 
-def k_nearest_neighbors(data, k,seed, distance_to_use, iterations=50):
+
+def k_nearest_neighbors(data, k,seed, distance_to_use, iterations=200):
 	data = data.assign(group = -1)
 	means = data.sample(k, random_state = seed).values[:,:-1]
 	old_data = None
@@ -57,7 +53,7 @@ def k_nearest_neighbors(data, k,seed, distance_to_use, iterations=50):
 			data.loc[i,'group'] = calculate_group(data.iloc[i].values[:-1],means,distance_to_use)
 
 		
-		if are_equal(data,old_data) or j == iterations:
+		if j == iterations:
 			export_data_txt(data)
 			return
 		
@@ -72,7 +68,9 @@ def k_nearest_neighbors(data, k,seed, distance_to_use, iterations=50):
 
 
 def execute(path, k = 7, d = 2, seed = 42):
-	data = pd.read_csv(path, delimiter=r'\s+')
+	data = pd.read_csv(path, delimiter=r'\t+',engine='python')
+	global id_save #gambiarra
+	id_save = data['id'].values
 	data = data.drop('id', 1)
 	data = data.drop('class', 1)
 
@@ -86,7 +84,5 @@ def execute(path, k = 7, d = 2, seed = 42):
 	k_nearest_neighbors(data.loc[:],k,seed,distance)
 
 
-
-execute("iris_teste.txt",3,1,seed=42)
 
 

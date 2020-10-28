@@ -23,9 +23,12 @@ def calculate_class(data, classes):
 	arg_max = np.argmax(classes_results)
 	class_value = list(classes_dict.keys())[arg_max]
 
+	ids = pd.Series(id_save)
+	data.insert(loc=0, column='id', value=ids)
+
 	print('Classe prevista:{}'.format(class_value))
 	print('vizinhos mais proximos: ', end='')
-	print(','.join(str(x) for x in list(data.index)), '\n')
+	print(','.join(str(x) for x in list(data['id'])), '\n')
 
 
 def k_nearest_neighbors(data, predict, k, distance_to_use):
@@ -55,7 +58,9 @@ def k_nearest_neighbors(data, predict, k, distance_to_use):
 
 def execute(path, k = 7, d = 2):
 
-	data = pd.read_csv(path, delimiter=r'\s+')
+	data = pd.read_csv(path, delimiter=r'\t+',engine='python')
+	global id_save #gambiarra
+	id_save = data['id'].values
 	data = data.drop('id', 1)
 	train, test = data, data
 
